@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.uniquedu.myinternet.MainActivity">
+
+    <Button
+        android:id="@+id/button_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="查询网络状态" />
+
+    <Button
+        android:id="@+id/button_url_connextion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="使用URLConnection" />
+
+    <Button
+        android:id="@+id/button_httpclient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="使用HttpClient" />
+
+    <Button
+        android:id="@+id/button_volley"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="使用Volley" />
+
+    <Button
+        android:id="@+id/button_okhttp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="使用OKHttp" />
+</LinearLayout>
