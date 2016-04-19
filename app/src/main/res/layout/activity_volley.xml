@@ -35,6 +35,11 @@
         android:layout_height="wrap_content"
         android:text="下载文件" />
 
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/networkImageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+
     <Button
         android:id="@+id/button_ssl"
         android:layout_width="wrap_content"

@@ -34,7 +34,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="下载文件" />
-
+    <Button
+        android:id="@+id/button_gzip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="使用Gzip"/>
     <Button
         android:id="@+id/button_ssl"
         android:layout_width="wrap_content"

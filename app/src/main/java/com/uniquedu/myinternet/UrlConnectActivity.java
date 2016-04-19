@@ -99,8 +99,8 @@ public class UrlConnectActivity extends AppCompatActivity {
                     public void run() {
                         //这里上传的是Donwload文件夹下的aa.png文件
                         postFile("http://192.168.149.2:8080/MyJsonFileTest/UploadFile", new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/aa.png"));
-                    }
-                }).start();
+        }
+    }).start();
                 break;
             case R.id.button_down:
                 //下载文件
