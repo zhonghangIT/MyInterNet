@@ -1,5 +1,6 @@
 package com.uniquedu.myinternet;
 
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -7,27 +8,34 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import java.io.BufferedReader;
 import java.io.DataInputStream;
-import java.io.DataOutput;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.security.KeyStore;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.cert.CertificateFactory;
+import java.security.cert.TrustAnchor;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.zip.GZIPInputStream;
+import java.util.List;
+
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManagerFactory;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-import cz.msebera.android.httpclient.entity.mime.FormBodyPartBuilder;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
-import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -44,8 +52,6 @@ public class OkhttpActivity extends AppCompatActivity {
     Button buttonFile;
     @InjectView(R.id.button_down)
     Button buttonDown;
-    @InjectView(R.id.button_ssl)
-    Button buttonSsl;
     @InjectView(R.id.button_gzip)
     Button buttonGzip;
     private OkHttpClient mOkHttpClient;
@@ -59,7 +65,7 @@ public class OkhttpActivity extends AppCompatActivity {
         mOkHttpClient = new OkHttpClient();
     }
 
-    @OnClick({R.id.button_get, R.id.button_post, R.id.button_gzip, R.id.button_file, R.id.button_down, R.id.button_ssl})
+    @OnClick({R.id.button_get, R.id.button_post, R.id.button_gzip, R.id.button_file, R.id.button_down})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_get:
@@ -79,9 +85,6 @@ public class OkhttpActivity extends AppCompatActivity {
             case R.id.button_gzip:
                 doGzip("http://192.168.149.2:8080/MyJsonFileTest/StudentServlet?action=gzip");
                 break;
-            case R.id.button_ssl:
-
-                break;
         }
     }
 
@@ -95,16 +98,7 @@ public class OkhttpActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                InputStream is = response.body().byteStream();
-                GZIPInputStream gzip = new GZIPInputStream(is);
-                BufferedReader br = new BufferedReader(new InputStreamReader(gzip));
-                String line = br.readLine();
-                String result = "";
-                while (line != null) {
-                    result += line;
-                    line = br.readLine();
-                }
-                Log.d(TAG, "网络连接返回数据" + result);
+                Log.d(TAG, "网络连接返回数据" + response.body().string());
             }
         });
     }
@@ -198,4 +192,8 @@ public class OkhttpActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
+
 }

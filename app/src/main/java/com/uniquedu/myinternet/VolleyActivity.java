@@ -37,8 +37,6 @@ public class VolleyActivity extends AppCompatActivity {
     Button buttonFile;
     @InjectView(R.id.button_down)
     Button buttonDown;
-    @InjectView(R.id.button_ssl)
-    Button buttonSsl;
     @InjectView(R.id.networkImageView)
     NetworkImageView networkImageView;
     private RequestQueue queue;
@@ -52,7 +50,7 @@ public class VolleyActivity extends AppCompatActivity {
         queue = Volley.newRequestQueue(this);
     }
 
-    @OnClick({R.id.button_get, R.id.button_post, R.id.button_file, R.id.button_down, R.id.button_ssl})
+    @OnClick({R.id.button_get, R.id.button_post, R.id.button_file, R.id.button_down})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_get:
@@ -74,8 +72,6 @@ public class VolleyActivity extends AppCompatActivity {
                 networkImageView.setDefaultImageResId(R.mipmap.ic_launcher);
                 networkImageView.setErrorImageResId(R.mipmap.ic_launcher);
                 networkImageView.setImageUrl("http://img2.imgtn.bdimg.com/it/u=3565965899,4220043727&fm=206&gp=0.jpg",imageLoader);
-                break;
-            case R.id.button_ssl:
                 break;
         }
     }

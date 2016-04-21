@@ -44,8 +44,6 @@ public class UrlConnectActivity extends AppCompatActivity {
     Button buttonFile;
     @InjectView(R.id.button_down)
     Button buttonDown;
-    @InjectView(R.id.button_ssl)
-    Button buttonSsl;
     @InjectView(R.id.progressbar)
     ProgressBar progressbar;
     private final String LINE_END = "\r\n";
@@ -70,7 +68,7 @@ public class UrlConnectActivity extends AppCompatActivity {
         ButterKnife.inject(this);
     }
 
-    @OnClick({R.id.button_get, R.id.button_post, R.id.button_file, R.id.button_down, R.id.button_ssl})
+    @OnClick({R.id.button_get, R.id.button_post, R.id.button_file, R.id.button_down})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_get:
@@ -110,8 +108,6 @@ public class UrlConnectActivity extends AppCompatActivity {
                         download("http://192.168.149.2:8080/MyJsonFileTest/android/app-release.apk", Environment.getExternalStorageDirectory() + "/cc.png", 3);
                     }
                 }).start();
-                break;
-            case R.id.button_ssl:
                 break;
         }
     }

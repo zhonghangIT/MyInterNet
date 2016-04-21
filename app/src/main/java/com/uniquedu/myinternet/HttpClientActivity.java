@@ -1,10 +1,13 @@
 package com.uniquedu.myinternet;
 
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+
+import com.uniquedu.myinternet.thread.HttpsHelper;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,6 +19,8 @@ import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+
+import javax.net.ssl.SSLContext;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -30,11 +35,16 @@ import cz.msebera.android.httpclient.StatusLine;
 import cz.msebera.android.httpclient.client.HttpClient;
 import cz.msebera.android.httpclient.client.config.RequestConfig;
 import cz.msebera.android.httpclient.client.entity.UrlEncodedFormEntity;
+import cz.msebera.android.httpclient.client.methods.CloseableHttpResponse;
 import cz.msebera.android.httpclient.client.methods.HttpGet;
 import cz.msebera.android.httpclient.client.methods.HttpPost;
+import cz.msebera.android.httpclient.conn.ssl.SSLConnectionSocketFactory;
+import cz.msebera.android.httpclient.conn.ssl.TrustSelfSignedStrategy;
 import cz.msebera.android.httpclient.entity.mime.MultipartEntityBuilder;
+import cz.msebera.android.httpclient.impl.client.CloseableHttpClient;
 import cz.msebera.android.httpclient.impl.client.HttpClients;
 import cz.msebera.android.httpclient.message.BasicNameValuePair;
+import cz.msebera.android.httpclient.ssl.SSLContexts;
 import cz.msebera.android.httpclient.util.EntityUtils;
 
 public class HttpClientActivity extends AppCompatActivity {
@@ -47,8 +57,6 @@ public class HttpClientActivity extends AppCompatActivity {
     Button buttonFile;
     @InjectView(R.id.button_down)
     Button buttonDown;
-    @InjectView(R.id.button_ssl)
-    Button buttonSsl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +65,7 @@ public class HttpClientActivity extends AppCompatActivity {
         ButterKnife.inject(this);
     }
 
-    @OnClick({R.id.button_get, R.id.button_post, R.id.button_file, R.id.button_down, R.id.button_ssl})
+    @OnClick({R.id.button_get, R.id.button_post, R.id.button_file, R.id.button_down})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_get:
@@ -95,10 +103,9 @@ public class HttpClientActivity extends AppCompatActivity {
                     }
                 }).start();
                 break;
-            case R.id.button_ssl:
-                break;
         }
     }
+
 
     private void download(String url, String path) {
         HttpClient client = HttpClients.createDefault();
