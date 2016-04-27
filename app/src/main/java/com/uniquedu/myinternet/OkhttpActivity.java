@@ -36,11 +36,13 @@ import butterknife.OnClick;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
+import okhttp3.Headers;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.internal.framed.Header;
 
 public class OkhttpActivity extends AppCompatActivity {
 
@@ -155,7 +157,7 @@ public class OkhttpActivity extends AppCompatActivity {
 
     private void postFile(String url, String filePath) {
         File file = new File(filePath);
-        RequestBody body = new MultipartBody.Builder().addFormDataPart("app", "app.png", MultipartBody.create(MultipartBody.FORM, file)).build();
+        RequestBody body = new MultipartBody.Builder().addFormDataPart("username", "测试").addFormDataPart("app", "app.png", MultipartBody.create(MultipartBody.FORM, file)).build();
         Request request = new Request.Builder().post(body).url(url).build();
         mOkHttpClient.newCall(request).enqueue(new Callback() {
             @Override
@@ -192,8 +194,6 @@ public class OkhttpActivity extends AppCompatActivity {
             }
         });
     }
-
-
 
 
 }

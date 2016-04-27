@@ -67,11 +67,11 @@ public class VolleyActivity extends AppCompatActivity {
             case R.id.button_down:
                 LruImageCache lruImageCache = LruImageCache.instance();
 
-                ImageLoader imageLoader = new ImageLoader(queue,lruImageCache);
+                ImageLoader imageLoader = new ImageLoader(queue, lruImageCache);
 
                 networkImageView.setDefaultImageResId(R.mipmap.ic_launcher);
                 networkImageView.setErrorImageResId(R.mipmap.ic_launcher);
-                networkImageView.setImageUrl("http://img2.imgtn.bdimg.com/it/u=3565965899,4220043727&fm=206&gp=0.jpg",imageLoader);
+                networkImageView.setImageUrl("http://img2.imgtn.bdimg.com/it/u=3565965899,4220043727&fm=206&gp=0.jpg", imageLoader);
                 break;
         }
     }
